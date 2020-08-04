@@ -1,3 +1,4 @@
+import 'package:bitcoin_ticker/coin_data.dart';
 import 'package:flutter/material.dart';
 
 class PriceScreen extends StatefulWidget {
@@ -6,7 +7,19 @@ class PriceScreen extends StatefulWidget {
 }
 
 class _PriceScreenState extends State<PriceScreen> {
-  String theSelected = 'CFA';
+  String theSelectedFirst = 'CFA';
+  List<DropdownMenuItem<String>> allTheCurrencies = [];
+
+  // void getTheCurrencyList() {
+  //   for (int i = 0; i < currenciesList.length; i++) {
+  //     String theSelected = currenciesList[i];
+  //     var theMenu = DropdownMenuItem(
+  //       child: Text(theSelected),
+  //       value: theSelected,
+  //     );
+  //     allTheCurrencies.add(theMenu);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -45,24 +58,20 @@ class _PriceScreenState extends State<PriceScreen> {
             padding: EdgeInsets.only(bottom: 30.0),
             color: Colors.lightBlue,
             child: DropdownButton<String>(
-              value: theSelected,
+              value: theSelectedFirst,
               items: [
                 DropdownMenuItem(
-                  child: Text('USD'),
-                  value: 'USD',
+                  child: Text('azaza'),
+                  value: 'azaz',
                 ),
                 DropdownMenuItem(
-                  child: Text('EUR'),
-                  value: 'EUR',
-                ),
-                DropdownMenuItem(
-                  child: Text('CFA'),
-                  value: 'CFA',
+                  child: Text('azzzaza'),
+                  value: 'azazzaz',
                 ),
               ],
               onChanged: (value) {
                 setState(() {
-                  theSelected = value;
+                  theSelectedFirst = value;
                 });
               },
             ),
