@@ -7,19 +7,21 @@ class PriceScreen extends StatefulWidget {
 }
 
 class _PriceScreenState extends State<PriceScreen> {
-  String theSelectedFirst = 'CFA';
-  List<DropdownMenuItem<String>> allTheCurrencies = [];
+  String theSelectedFirst = "CFA";
+  
+  List<DropdownMenuItem<String>> getTheCurrencyList() {
+    List<DropdownMenuItem<String>> allTheCurrencies = [];
 
-  // void getTheCurrencyList() {
-  //   for (int i = 0; i < currenciesList.length; i++) {
-  //     String theSelected = currenciesList[i];
-  //     var theMenu = DropdownMenuItem(
-  //       child: Text(theSelected),
-  //       value: theSelected,
-  //     );
-  //     allTheCurrencies.add(theMenu);
-  //   }
-  // }
+    for (int i = 0; i < currenciesList.length; i++) {
+      String theSelected = currenciesList[i];
+      var theMenu = DropdownMenuItem(
+        child: Text(theSelected),
+        value: theSelected,
+      );
+      allTheCurrencies.add(theMenu);
+    }
+    return allTheCurrencies;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,16 +61,7 @@ class _PriceScreenState extends State<PriceScreen> {
             color: Colors.lightBlue,
             child: DropdownButton<String>(
               value: theSelectedFirst,
-              items: [
-                DropdownMenuItem(
-                  child: Text('azaza'),
-                  value: 'azaz',
-                ),
-                DropdownMenuItem(
-                  child: Text('azzzaza'),
-                  value: 'azazzaz',
-                ),
-              ],
+              items: getTheCurrencyList(),
               onChanged: (value) {
                 setState(() {
                   theSelectedFirst = value;
