@@ -1,5 +1,7 @@
 import 'package:bitcoin_ticker/coin_data.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:io' show Platform;
 
 class PriceScreen extends StatefulWidget {
   @override
@@ -7,19 +9,48 @@ class PriceScreen extends StatefulWidget {
 }
 
 class _PriceScreenState extends State<PriceScreen> {
-  String theSelectedFirst = 'CFA';
-  List<DropdownMenuItem<String>> allTheCurrencies = [];
 
-  // void getTheCurrencyList() {
-  //   for (int i = 0; i < currenciesList.length; i++) {
-  //     String theSelected = currenciesList[i];
-  //     var theMenu = DropdownMenuItem(
-  //       child: Text(theSelected),
-  //       value: theSelected,
-  //     );
-  //     allTheCurrencies.add(theMenu);
-  //   }
-  // }
+
+   DropdownButton<String> getByAndroid() {
+    String theSelectedFirst = "CFA";
+    List<DropdownMenuItem<String>> allTheCurrencies = [];
+    for (int i = 0; i < currenciesList.length; i++) {
+      String theSelected = currenciesList[i];
+      var theMenu = DropdownMenuItem(
+        child: Text(theSelected),
+        value: theSelected,
+      );
+      allTheCurrencies.add(theMenu);
+    }
+   DropdownButton<String> dr=  DropdownButton<String>(
+    value: theSelectedFirst,
+    items:allTheCurrencies,
+    onChanged: (value) {
+      setState(() {
+        theSelectedFirst = value;
+      });
+    },
+  );
+    return dr;
+  }
+
+  CupertinoPicker getByIos() {
+    List<Text> allTheCurrencies = [];
+    for (int i = 0; i < currenciesList.length; i++) {
+      String theSelected = currenciesList[i];
+      var theMenu = Text(theSelected);
+      allTheCurrencies.add(theMenu);
+    }
+    CupertinoPicker cu= CupertinoPicker(
+                backgroundColor: Colors.lightBlue,
+                itemExtent: 32.0,
+                onSelectedItemChanged: (selectedIndex) {
+                  print(selectedIndex);
+                },
+                children: allTheCurrencies
+                );
+    return cu;              
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,27 +88,11 @@ class _PriceScreenState extends State<PriceScreen> {
             alignment: Alignment.center,
             padding: EdgeInsets.only(bottom: 30.0),
             color: Colors.lightBlue,
-            child: DropdownButton<String>(
-              value: theSelectedFirst,
-              items: [
-                DropdownMenuItem(
-                  child: Text('azaza'),
-                  value: 'azaz',
-                ),
-                DropdownMenuItem(
-                  child: Text('azzzaza'),
-                  value: 'azazzaz',
-                ),
-              ],
-              onChanged: (value) {
-                setState(() {
-                  theSelectedFirst = value;
-                });
-              },
-            ),
+            child: Platform.isAndroid ? getByAndroid() : getByIos()
           ),
         ],
       ),
     );
   }
 }
+
