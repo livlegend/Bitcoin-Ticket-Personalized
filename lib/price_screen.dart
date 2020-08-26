@@ -1,4 +1,5 @@
 import 'package:bitcoin_ticker/coin_data.dart';
+import 'package:bitcoin_ticker/network_helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io' show Platform;
@@ -9,9 +10,7 @@ class PriceScreen extends StatefulWidget {
 }
 
 class _PriceScreenState extends State<PriceScreen> {
-
-
-   DropdownButton<String> getByAndroid() {
+  DropdownButton<String> getByAndroid() {
     String theSelectedFirst = "CFA";
     List<DropdownMenuItem<String>> allTheCurrencies = [];
     for (int i = 0; i < currenciesList.length; i++) {
@@ -22,15 +21,15 @@ class _PriceScreenState extends State<PriceScreen> {
       );
       allTheCurrencies.add(theMenu);
     }
-   DropdownButton<String> dr=  DropdownButton<String>(
-    value: theSelectedFirst,
-    items:allTheCurrencies,
-    onChanged: (value) {
-      setState(() {
-        theSelectedFirst = value;
-      });
-    },
-  );
+    DropdownButton<String> dr = DropdownButton<String>(
+      value: theSelectedFirst,
+      items: allTheCurrencies,
+      onChanged: (value) {
+        setState(() {
+          theSelectedFirst = value;
+        });
+      },
+    );
     return dr;
   }
 
@@ -41,16 +40,17 @@ class _PriceScreenState extends State<PriceScreen> {
       var theMenu = Text(theSelected);
       allTheCurrencies.add(theMenu);
     }
-    CupertinoPicker cu= CupertinoPicker(
-                backgroundColor: Colors.lightBlue,
-                itemExtent: 32.0,
-                onSelectedItemChanged: (selectedIndex) {
-                  print(selectedIndex);
-                },
-                children: allTheCurrencies
-                );
-    return cu;              
+    CupertinoPicker cu = CupertinoPicker(
+        backgroundColor: Colors.lightBlue,
+        itemExtent: 32.0,
+        onSelectedItemChanged: (selectedIndex) {
+          print(selectedIndex);
+        },
+        children: allTheCurrencies);
+    return cu;
   }
+
+  NetworkHelper n0 = new NetworkHelper();
 
   @override
   Widget build(BuildContext context) {
@@ -84,15 +84,13 @@ class _PriceScreenState extends State<PriceScreen> {
             ),
           ),
           Container(
-            height: 150.0,
-            alignment: Alignment.center,
-            padding: EdgeInsets.only(bottom: 30.0),
-            color: Colors.lightBlue,
-            child: Platform.isAndroid ? getByAndroid() : getByIos()
-          ),
+              height: 150.0,
+              alignment: Alignment.center,
+              padding: EdgeInsets.only(bottom: 30.0),
+              color: Colors.lightBlue,
+              child: Platform.isAndroid ? getByAndroid() : getByIos()),
         ],
       ),
     );
   }
 }
-
