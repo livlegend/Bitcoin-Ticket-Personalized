@@ -64,12 +64,17 @@ class _PriceScreenState extends State<PriceScreen> {
         children: <Widget>[
           Padding(
             padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
-            child: Card(
+            child: FlatButton(
               color: Colors.lightBlueAccent,
-              elevation: 5.0,
+              // elevation: 5.0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
               ),
+              onPressed: () {
+                NetworkHelper net = NetworkHelper();
+                net.getData();
+                
+              },
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
                 child: Text(
