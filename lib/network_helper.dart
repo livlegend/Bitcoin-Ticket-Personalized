@@ -8,7 +8,7 @@ class NetworkHelper {
     http.Response response = await http.get(base_url);
     if (response.statusCode == 200) {
       //la connexion a été établit
-      String data = response.body;
+      String data = response.body.toString();
       var decodedData = jsonDecode(data);
       print(decodedData);
     } else {
