@@ -10,7 +10,8 @@ class NetworkHelper {
       //la connexion a été établit
       String data = response.body.toString();
       var decodedData = jsonDecode(data);
-      print(decodedData);
+      String leString = decodedData.toString();
+      print(leString);
     } else {
       print(response.statusCode);
     }
